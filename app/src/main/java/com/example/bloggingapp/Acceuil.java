@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -27,13 +28,20 @@ public class Acceuil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceuil);
 
+
+
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View headerView = inflater.inflate(R.layout.header_layout, recyclerView, false);
+
         DB=new dbhelp(this);
         titre=new ArrayList<>();
         contenu=new ArrayList<>();
         recyclerView=findViewById(R.id.listarticle);
-        adapter=new MyAdapter(this,titre,contenu);
+        adapter=new MyAdapter(this, titre, contenu, headerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         voir();
 
         ajout=findViewById(R.id.ajouter_article);

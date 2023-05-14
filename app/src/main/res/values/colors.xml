@@ -6,7 +6,7 @@
     <color name="secondaire">#EFEDED</color>
     <color name="tertiaire">#FFFFFF</color>
     <color name="back">#DFDDDD</color>
-
+    <color name="card_background">#212121</color>
     <color name="titre2">#272727</color>
 
 </resources>
