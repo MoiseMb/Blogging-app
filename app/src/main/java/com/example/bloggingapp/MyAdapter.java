@@ -20,12 +20,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private Context context;
     private ArrayList<String> titre_id;
+    private ArrayList<String> auteur_id;
+    private ArrayList<String> date_id;
     private ArrayList<String> contenu_id;
     private View headerView;
 
-    public MyAdapter(Context context, ArrayList<String> titre_id, ArrayList<String> contenu_id, View headerView) {
+    public MyAdapter(Context context, ArrayList<String> titre_id, ArrayList<String> contenu_id, ArrayList<String> auteur_id, ArrayList<String> date_id, View headerView) {
         this.context = context;
         this.titre_id = titre_id;
+        this.auteur_id=auteur_id;
+        this.date_id=date_id;
         this.contenu_id = contenu_id;
         this.headerView = headerView;
     }
@@ -45,6 +49,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         if (position != 0) {
             holder.titre_id.setText(titre_id.get(position - 1));
+            holder.auteur_id.setText(auteur_id.get(position - 1));
+            holder.date_id.setText(date_id.get(position - 1));
             holder.contenu_id.setText(contenu_id.get(position - 1));
         }
     }
@@ -65,12 +71,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView titre_id,contenu_id;
+        TextView titre_id,contenu_id,auteur_id,date_id;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             titre_id=itemView.findViewById(R.id.nom_titre);
+            auteur_id=itemView.findViewById(R.id.nom_auteur);
+            date_id=itemView.findViewById(R.id.nom_date);
             contenu_id=itemView.findViewById(R.id.nom_contenu);
 
             //On recupere le le titre de l'article et le contenu au click sur l'article
@@ -80,10 +88,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 public void onClick(View v) {
                     String myText = titre_id.getText().toString();
                     String ctn=contenu_id.getText().toString();
+                    String dt=date_id.getText().toString();
+                    String at=auteur_id.getText().toString();
+
 
                     Intent rt=new Intent(context,VoirArticle.class);
                     rt.putExtra("titre",myText);
                     rt.putExtra("contenu",ctn);
+                    rt.putExtra("date",dt);
+                    rt.putExtra("auteur",at);
+
 
                     context.startActivity(rt);
 

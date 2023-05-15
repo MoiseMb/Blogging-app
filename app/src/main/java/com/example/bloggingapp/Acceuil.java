@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Acceuil extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ArrayList<String> titre,contenu;
+    ArrayList<String> titre,contenu,auteur,date;
     dbhelp DB;
     MyAdapter adapter;
 
@@ -37,8 +37,10 @@ public class Acceuil extends AppCompatActivity {
         DB=new dbhelp(this);
         titre=new ArrayList<>();
         contenu=new ArrayList<>();
+        auteur=new ArrayList<>();
+        date=new ArrayList<>();
         recyclerView=findViewById(R.id.listarticle);
-        adapter=new MyAdapter(this, titre, contenu, headerView);
+        adapter=new MyAdapter(this, titre, contenu,auteur,date, headerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -65,6 +67,8 @@ public class Acceuil extends AppCompatActivity {
 
                  titre.add(cursor.getString(0));
                 contenu.add(cursor.getString(1));
+                auteur.add(cursor.getString(2));
+                date.add(cursor.getString(3));
             }
 
         }

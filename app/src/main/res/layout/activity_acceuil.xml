@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Acceuil"
-    android:background="@color/secondaire">
+    >
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -15,7 +15,8 @@
 
 
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="109dp" />
+        tools:layout_editor_absoluteY="109dp"
+        android:background="@color/white"/>
 
     <Button
         android:id="@+id/ajouter_article"

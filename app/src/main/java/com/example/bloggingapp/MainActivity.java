@@ -11,9 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
-    EditText titre,contenu;
+    EditText titre,contenu,auteur;
     Button ajouter,annuler;
 
     dbhelp DB;
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         titre=findViewById(R.id.titre);  //champs pour mettre le nom de l'article
 
         contenu=findViewById(R.id.contenu); //champ pour le contenu de l'article
+
+        auteur=findViewById(R.id.auteur2);
 
         ajouter=findViewById(R.id.ajouter); //le bouton ajouter pour valider l'ajout dans la base de donnees
 
@@ -47,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         DB= new dbhelp(this);
 
 
+
+
         //ajout l'article dans la db apres click sur le bouton ajouter
 
        ajouter.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                // on verifie d'abord si les champs ne sont pas vide
 
-               if (titre.getText().toString().trim().isEmpty() ||contenu.getText().toString().trim().isEmpty() ){
+               if (titre.getText().toString().trim().isEmpty() ||contenu.getText().toString().trim().isEmpty() || auteur.getText().toString().trim().isEmpty() ){
 
                    AlertDialog.Builder build=new AlertDialog.Builder(MainActivity.this);
                    build.setCancelable(true);
@@ -71,9 +79,20 @@ public class MainActivity extends AppCompatActivity {
 
                String tr=   titre.getText().toString();
                String con=   contenu.getText().toString();
+               String aut=auteur.getText().toString();
 
 
-               Boolean verif=DB.ajouterarticle(tr,con);
+               String bisko= null;
+
+
+
+               if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                   LocalDate currentDate = LocalDate.now();
+                   bisko = currentDate.format(DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.getDefault()));
+
+               }
+
+               Boolean verif=DB.ajouterarticle(tr,con ,aut,bisko);
 
                //Insetion reussie
 
